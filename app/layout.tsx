@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     siteName: "Marco Atencio Portfolio",
     images: [
       {
-        url: "/og-image.jpg",
+        url: "/og-image.svg",
         width: 1200,
         height: 630,
         alt: "Marco Atencio - Desarrollador Full-Stack",
@@ -50,7 +50,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Marco Atencio | Desarrollador Full-Stack",
     description: "Portfolio de Marco Atencio - Desarrollador Full-Stack Senior con más de 5 años de experiencia en Java, Spring Boot, React y Angular.",
-    images: ["/og-image.jpg"],
+    images: ["/og-image.svg"],
     creator: "@marcoatencio",
   },
   robots: {
@@ -116,6 +116,9 @@ export default function RootLayout({
             __html: JSON.stringify(structuredData),
           }}
         />
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <link rel="manifest" href="/manifest.json" />
         <Script
           id="performance-monitoring"
           strategy="afterInteractive"

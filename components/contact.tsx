@@ -44,22 +44,44 @@ export function Contact() {
     e.preventDefault()
     setIsSubmitting(true)
 
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 1500))
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      })
 
-    toast({
-      title: (
-        <div className="flex items-center gap-2">
-          <CheckCircle2 className="h-5 w-5 text-green-500" />
-          <span>{t.contact.successTitle}</span>
-        </div>
-      ),
-      description: t.contact.successDescription,
-      duration: 5000,
-    })
+      const data = await response.json()
 
-    setFormData({ name: "", email: "", message: "" })
-    setIsSubmitting(false)
+      if (!response.ok) {
+        throw new Error(data.error || 'Error al enviar el mensaje')
+      }
+
+      toast({
+        title: (
+          <div className="flex items-center gap-2">
+            <CheckCircle2 className="h-5 w-5 text-green-500" />
+            <span>{t.contact.successTitle}</span>
+          </div>
+        ),
+        description: t.contact.successDescription,
+        duration: 5000,
+      })
+
+      setFormData({ name: "", email: "", message: "" })
+    } catch (error) {
+      console.error('Error submitting form:', error)
+      toast({
+        title: "Error",
+        description: error instanceof Error ? error.message : 'Error al enviar el mensaje. Inténtalo de nuevo.',
+        variant: "destructive",
+        duration: 5000,
+      })
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
