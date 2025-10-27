@@ -56,7 +56,7 @@ export function ParticlesBackground() {
         // Theme-aware colors
         const isLight = theme === 'light'
         const particleColor = isLight
-          ? `rgba(31, 41, 55, ${this.opacity})`  // Much darker gray for light mode
+          ? `rgba(55, 65, 81, ${this.opacity})`  // Even darker gray for light mode
           : `rgba(6, 182, 212, ${this.opacity})` // Cyan for dark mode
 
         ctx.fillStyle = particleColor
@@ -95,7 +95,7 @@ export function ParticlesBackground() {
           if (distance < 120) {
             const isLight = resolvedTheme === 'light'
             const connectionColor = isLight
-              ? `rgba(31, 41, 55, ${0.15 * (1 - distance / 120)})`  // Dark gray for light mode
+              ? `rgba(55, 65, 81, ${0.15 * (1 - distance / 120)})`  // Match darker particle color
               : `rgba(6, 182, 212, ${0.15 * (1 - distance / 120)})` // Cyan for dark mode
 
             ctx.strokeStyle = connectionColor
