@@ -25,7 +25,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Enviar email
-    const { data, error } = await resend.emails.send({
+    const { error } = await resend.emails.send({
       from: 'Portafolio <onboarding@resend.dev>', // Cambiar por dominio verificado
       to: process.env.CONTACT_EMAIL || 'marco@example.com', // Email de destino
       subject: `Nuevo mensaje de contacto de ${name}`,
