@@ -1,9 +1,11 @@
 "use client"
 
 import { useEffect, useRef } from "react"
+import { useTheme } from "next-themes"
 
 export function ParticlesBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
+  const { resolvedTheme } = useTheme()
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -48,9 +50,16 @@ export function ParticlesBackground() {
         if (this.y < 0) this.y = canvas.height
       }
 
-      draw() {
+      draw(theme: string) {
         if (!ctx) return
-        ctx.fillStyle = `rgba(6, 182, 212, ${this.opacity})`
+
+        // Theme-aware colors
+        const isLight = theme === 'light'
+        const particleColor = isLight
+          ? `rgba(17, 24, 39, ${this.opacity})`  // Dark gray for light mode
+          : `rgba(6, 182, 212, ${this.opacity})` // Cyan for dark mode
+
+        ctx.fillStyle = particleColor
         ctx.beginPath()
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2)
         ctx.fill()
@@ -73,10 +82,10 @@ export function ParticlesBackground() {
 
       particlesArray.forEach((particle) => {
         particle.update(canvas)
-        particle.draw()
+        particle.draw(resolvedTheme || 'dark')
       })
 
-      // Draw connections
+      // Draw connections with theme-aware colors
       particlesArray.forEach((a, index) => {
         particlesArray.slice(index + 1).forEach((b) => {
           const dx = a.x - b.x
@@ -84,7 +93,12 @@ export function ParticlesBackground() {
           const distance = Math.sqrt(dx * dx + dy * dy)
 
           if (distance < 120) {
-            ctx.strokeStyle = `rgba(6, 182, 212, ${0.15 * (1 - distance / 120)})`
+            const isLight = resolvedTheme === 'light'
+            const connectionColor = isLight
+              ? `rgba(17, 24, 39, ${0.15 * (1 - distance / 120)})`  // Dark gray for light mode
+              : `rgba(6, 182, 212, ${0.15 * (1 - distance / 120)})` // Cyan for dark mode
+
+            ctx.strokeStyle = connectionColor
             ctx.lineWidth = 0.5
             ctx.beginPath()
             ctx.moveTo(a.x, a.y)
@@ -102,7 +116,7 @@ export function ParticlesBackground() {
     return () => {
       window.removeEventListener("resize", resizeCanvas)
     }
-  }, [])
+  }, [resolvedTheme]) // Add resolvedTheme to dependencies
 
   return <canvas ref={canvasRef} className="fixed inset-0 pointer-events-none z-0 opacity-40" />
 }
