@@ -95,7 +95,7 @@ export function ParticlesBackground() {
           if (distance < 120) {
             const isLight = resolvedTheme === 'light'
             const connectionColor = isLight
-              ? `rgba(17, 24, 39, ${0.25 * (1 - distance / 120)})`  // Increased opacity for better visibility
+              ? `rgba(17, 24, 39, ${0.4 * (1 - distance / 120)})`  // Much darker and more visible
               : `rgba(6, 182, 212, ${0.15 * (1 - distance / 120)})` // Cyan for dark mode
 
             ctx.strokeStyle = connectionColor
