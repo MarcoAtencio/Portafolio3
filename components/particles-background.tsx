@@ -37,7 +37,7 @@ export function ParticlesBackground() {
         this.size = Math.random() * 2 + 0.5
         this.speedX = Math.random() * 0.5 - 0.25
         this.speedY = Math.random() * 0.5 - 0.25
-        this.opacity = Math.random() * 0.5 + 0.2
+        this.opacity = Math.random() * 0.6 + 0.3 // Increased minimum opacity
       }
 
       update(canvas: HTMLCanvasElement) {
@@ -56,7 +56,7 @@ export function ParticlesBackground() {
         // Theme-aware colors
         const isLight = theme === 'light'
         const particleColor = isLight
-          ? `rgba(17, 24, 39, ${this.opacity})`  // Dark gray for light mode
+          ? `rgba(31, 41, 55, ${this.opacity})`  // Much darker gray for light mode
           : `rgba(6, 182, 212, ${this.opacity})` // Cyan for dark mode
 
         ctx.fillStyle = particleColor
@@ -95,7 +95,7 @@ export function ParticlesBackground() {
           if (distance < 120) {
             const isLight = resolvedTheme === 'light'
             const connectionColor = isLight
-              ? `rgba(17, 24, 39, ${0.15 * (1 - distance / 120)})`  // Dark gray for light mode
+              ? `rgba(31, 41, 55, ${0.15 * (1 - distance / 120)})`  // Dark gray for light mode
               : `rgba(6, 182, 212, ${0.15 * (1 - distance / 120)})` // Cyan for dark mode
 
             ctx.strokeStyle = connectionColor
