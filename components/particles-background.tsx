@@ -37,7 +37,7 @@ export function ParticlesBackground() {
         this.size = Math.random() * 2 + 0.5
         this.speedX = Math.random() * 0.5 - 0.25
         this.speedY = Math.random() * 0.5 - 0.25
-        this.opacity = Math.random() * 0.4 + 0.2 // Adjusted for more particles
+        this.opacity = Math.random() * 0.3 + 0.1 // Reduced for more particles
       }
 
       update(canvas: HTMLCanvasElement) {
@@ -66,10 +66,10 @@ export function ParticlesBackground() {
       }
     }
 
-    // Create particles - increase count for better visibility
+    // Create particles - dramatically increase count for amazing effect
     const particlesArray: Particle[] = []
     const isMobile = window.innerWidth < 768
-    const numberOfParticles = isMobile ? 80 : 150 // Increased from 40/80 to 80/150
+    const numberOfParticles = isMobile ? 120 : 250 // Increased from 80/150 to 120/250
 
     for (let i = 0; i < numberOfParticles; i++) {
       particlesArray.push(new Particle(canvas))
