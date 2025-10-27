@@ -4,7 +4,7 @@ import { GeistSans } from "geist/font/sans"
 import { GeistMono } from "geist/font/mono"
 import { Analytics } from "@vercel/analytics/next"
 import { Toaster } from "@/components/ui/toaster"
-import { ThemeProvider } from "@/components/theme-provider"
+import { ThemeProvider } from 'next-themes'
 import { LanguageProvider } from "@/components/language-provider"
 import { ErrorBoundary } from "@/components/error-boundary"
 import { Loading } from "@/components/loading"
@@ -138,7 +138,12 @@ export default function RootLayout({
           Saltar al contenido principal
         </a>
         <ErrorBoundary>
-          <ThemeProvider defaultTheme="dark">
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="dark"
+            enableSystem
+            disableTransitionOnChange
+          >
             <LanguageProvider>
               <Suspense fallback={<Loading />}>
                 {children}

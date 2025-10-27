@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Menu, X, Languages } from "lucide-react"
+import { useTheme } from 'next-themes'
 import { ThemeToggle } from '@/components/ui/theme-toggle'
 import { useLanguage } from "@/components/language-provider"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
@@ -11,6 +12,7 @@ export function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const { language, setLanguage, t } = useLanguage()
+  const { resolvedTheme } = useTheme()
 
   useEffect(() => {
     const handleScroll = () => {
